@@ -62,7 +62,7 @@ export default function Contact() {
             Get in touch with us to discuss your project. We're here to help bring your vision to life
           </p>
           <a
-            href="https://calendar.app.google/uwS5JosquJcnpcPk6"
+            href="https://cal.com/qymaxtech/30min"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-cyan-500 text-white px-8 py-4 rounded-lg hover:bg-cyan-600 transition-colors font-semibold text-lg shadow-lg hover:shadow-xl"
@@ -93,7 +93,7 @@ export default function Contact() {
               <div className="mt-10 pt-10 border-t border-white/20">
                 <h4 className="font-semibold mb-4">Prefer to schedule a meeting?</h4>
                 <a
-                  href="https://calendar.app.google/uwS5JosquJcnpcPk6"
+                  href="https://cal.com/qymaxtech/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold"

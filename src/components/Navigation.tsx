@@ -81,7 +81,7 @@ export default function Navigation() {
                 )}
               </div>
               <a
-                href="https://calendar.app.google/uwS5JosquJcnpcPk6"
+                href="https://cal.com/qymaxtech/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-cyan-500 text-white px-6 py-2 rounded-lg hover:bg-cyan-600 transition-colors font-medium flex items-center gap-2"
@@ -131,7 +131,7 @@ export default function Navigation() {
               ))}
             </div>
             <a
-              href="https://calendar.app.google/uwS5JosquJcnpcPk6"
+              href="https://cal.com/qymaxtech/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full text-left px-3 py-2 bg-cyan-500 text-white hover:bg-cyan-600 rounded-md transition-colors font-medium flex items-center gap-2"

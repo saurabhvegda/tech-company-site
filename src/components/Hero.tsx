@@ -35,7 +35,7 @@ export default function Hero() {
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <a
-              href="https://calendar.app.google/uwS5JosquJcnpcPk6"
+              href="https://cal.com/qymaxtech/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-blue-600 px-8 py-4 rounded-lg hover:bg-gray-50 transition-colors font-semibold text-lg border-2 border-blue-600"

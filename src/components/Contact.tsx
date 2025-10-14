@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, Send, Calendar } from 'lucide-react';
+import { Mail, Send, Calendar } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -8,15 +8,40 @@ export default function Contact() {
     company: '',
     message: ''
   });
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('success');
-    setTimeout(() => {
-      setFormData({ name: '', email: '', company: '', message: '' });
-      setStatus('idle');
-    }, 3000);
+    setStatus('sending');
+
+    const formPayload = new FormData();
+    formPayload.append('access_key', '7c5e57c1-53ec-4f1d-b070-9a46cef62820');
+    formPayload.append('name', formData.name);
+    formPayload.append('email', formData.email);
+    formPayload.append('company', formData.company);
+    formPayload.append('message', formData.message);
+    formPayload.append('subject', 'New Contact Form Submission - QymaxTech');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formPayload
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', company: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch (error) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -58,19 +83,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="font-semibold mb-1">Email</div>
-                    <a href="mailto:hello@yourcompany.com" className="hover:underline">
+                    <a href="mailto:hello@qymaxtech.com" className="hover:underline">
                       hello@qymaxtech.com
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-white/20 p-3 rounded-lg">
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <div className="font-semibold mb-1">Phone</div>
-                    <a href="tel:+1234567890" className="hover:underline">
-                      +1 (425) 214-2397
                     </a>
                   </div>
                 </div>
@@ -162,11 +176,18 @@ export default function Contact() {
                 </div>
               )}
 
+              {status === 'error' && (
+                <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+                  Something went wrong. Please try again or email us directly.
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center gap-2 group"
+                disabled={status === 'sending'}
+                className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center gap-2 group disabled:bg-blue-400 disabled:cursor-not-allowed"
               >
-                Send Message
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
                 <Send size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
